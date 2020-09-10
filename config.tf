@@ -37,6 +37,7 @@ resource "kubernetes_config_map" "scanner_config" {
       upload = {
         type                 = "s3"
         cloudfrontUrlSigning = true
+        cloudfrontHost       = module.cloudfront.cloudfront_host
         cloudfrontKeypairId  = join("", module.cloudfront.cloudfront_keypair_ids)
         bucket               = module.cloudfront.bucket_id
         privateKeyPath       = "/usr/app/signing.key"
