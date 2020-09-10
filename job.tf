@@ -100,7 +100,7 @@ resource "kubernetes_cron_job" "cloudsploit_scanner" {
 
                 content {
                   name  = "CLOUDSPLOIT_PLUGIN"
-                  value = join(",", var.plugin_scan)
+                  value = var.plugin_scan
                 }
               }
 
