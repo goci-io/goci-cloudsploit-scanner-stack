@@ -104,8 +104,8 @@ resource "kubernetes_cron_job" "cloudsploit_scanner" {
               volume_mount {
                 read_only  = true
                 name       = "private-key"
-                sub_path   = "decrypt.key"
-                mount_path = "/usr/app/decrypt.key"
+                sub_path   = "signing.key"
+                mount_path = "/usr/app/signing.key"
               }
             }
           }

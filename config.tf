@@ -10,7 +10,7 @@ resource "kubernetes_secret" "signing_key" {
   }
 
   data = {
-    "decrypt.key" = tls_private_key.signing.private_key_pem
+    "signing.key" = tls_private_key.signing.private_key_pem
   }
 }
 
@@ -27,7 +27,7 @@ resource "kubernetes_config_map" "scanner_config" {
         cloudfrontUrlSigning = true
         cloudfrontKeypairId  = join("", module.cloudfront.cloudfront_keypair_ids)
         bucket               = module.cloudfront.bucket_id
-        privateKeyPath       = "/usr/app/decrypt.key"
+        privateKeyPath       = "/usr/app/signing.key"
         client = {
           region = data.aws_region.current.name
         }
