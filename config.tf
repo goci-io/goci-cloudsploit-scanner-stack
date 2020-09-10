@@ -1,3 +1,14 @@
+locals {
+  discord_notification_config = var.discord_webhook_url == "" ? {} : {
+    discord = {
+      type   = "discord"
+      name   = var.name
+      jobUrl = var.jobs_url
+      url    = var.discord_webhook_url
+    }
+  }
+}
+
 resource "tls_private_key" "signing" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -22,6 +33,7 @@ resource "kubernetes_config_map" "scanner_config" {
 
   data = {
     "config.json" = jsonencode({
+      notification = merge({}, local.discord_notification_config)
       upload = {
         type                 = "s3"
         cloudfrontUrlSigning = true

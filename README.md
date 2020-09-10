@@ -11,4 +11,6 @@
 - Cloudfront and S3 Buckets for Reports and signed URLs
 
 
+**Note:** This Module is intended to be used as Root/Standalone Module.
+
 _This repository was created via [github-repository](https://github.com/goci-io/github-repository)._
