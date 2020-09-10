@@ -39,3 +39,15 @@ variable "plugin_scan" {
   default     = ""
   description = "Plugin Scan to execute. See https://github.com/cloudsploit/scans/tree/master/plugins"
 }
+
+variable "jobs_url" {
+  type        = string
+  default     = ""
+  description = "URL used to link to a Detail View of executed Scans"
+}
+
+variable "discord_webhook_url" {
+  type        = string
+  default     = ""
+  description = "Webhook URL to send Notification about new Reports to (/apis/webhooks/...). Enables Discord Notification"
+}
