@@ -14,6 +14,7 @@ resource "kubernetes_cron_job" "cloudsploit_scanner" {
 
     job_template {
       metadata {
+        annotations = var.job_annotations
         labels = {
           app     = "cloudsploit-scanner"
           release = var.name
@@ -74,6 +75,15 @@ resource "kubernetes_cron_job" "cloudsploit_scanner" {
               env {
                 name  = "CLOUDSPLOIT_CONFIG_PATH"
                 value = "/usr/app/config.json"
+              }
+
+              dynamic "env" {
+                for_each = var.job_environment
+
+                content {
+                  name  = env.key
+                  value = env.value
+                }
               }
 
               dynamic "env" {

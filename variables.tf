@@ -51,3 +51,15 @@ variable "discord_webhook_url" {
   default     = ""
   description = "Webhook URL to send Notification about new Reports to (/apis/webhooks/...). Enables Discord Notification"
 }
+
+variable "job_annotations" {
+  type        = map(string)
+  default     = {}
+  description = "Additional Annotations for the Job Template"
+}
+
+variable "job_environment" {
+  type        = map(string)
+  default     = {}
+  description = "Additional Environment Variables for the Job Template"
+}
