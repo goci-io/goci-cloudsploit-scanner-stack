@@ -7,6 +7,7 @@ module "cloudfront" {
   cloudfront_max_ttl                = 0
   cloudfront_default_ttl            = 0
   cloudfront_viewer_protocol_policy = "https-only"
+  cloudfront_encode_keys            = false
   cloudfront_public_keys            = [tls_private_key.signing.public_key_pem]
   lifecycle_expiration_rules = {
     cleanup = {
