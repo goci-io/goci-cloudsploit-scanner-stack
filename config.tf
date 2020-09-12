@@ -20,7 +20,7 @@ resource "kubernetes_config_map" "scanner_config" {
       notification = merge({}, local.discord_notification_config)
       upload = {
         type   = "s3"
-        bucket = var.cloudsploit_bucket
+        bucket = module.s3_reports.this_s3_bucket_id
         client = {
           region = data.aws_region.current.name
         }
@@ -38,7 +38,7 @@ module "bucket_label" {
   tags       = var.tags
 }
 
-module "s3_bucket_for_logs" {
+module "s3_reports" {
   source         = "terraform-aws-modules/s3-bucket/aws"
   bucket         = module.bucket_label.id
   tags           = module.bucket_label.tags
