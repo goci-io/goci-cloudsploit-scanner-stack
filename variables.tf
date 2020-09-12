@@ -4,12 +4,6 @@ variable "name" {
   description = "Name of Cloudsploit Scanner Installation"
 }
 
-variable "namespace" {
-  type        = string
-  default     = ""
-  description = "Company or Organization Prefix"
-}
-
 variable "schedule" {
   type        = string
   default     = "0 3 * * 0"
@@ -18,7 +12,7 @@ variable "schedule" {
 
 variable "scanner_version" {
   type        = string
-  default     = "0.1.0"
+  default     = "0.2.0"
   description = "Desired Scanner Docker Image Tag"
 }
 
@@ -40,16 +34,28 @@ variable "plugin_scan" {
   description = "Plugin Scan to execute. See https://github.com/cloudsploit/scans/tree/master/plugins"
 }
 
-variable "jobs_url" {
+variable "scan_details_host" {
   type        = string
   default     = ""
-  description = "URL used to link to a Detail View of executed Scans"
+  description = "Host used to build Link to a Detail View of executed Scans. Used for Notifications"
+}
+
+variable "scan_details_prefix" {
+  type        = string
+  default     = ""
+  description = "URL Prefix used to build Link to a Detail View of executed Scans. Used for Notifications"
 }
 
 variable "discord_webhook_url" {
   type        = string
   default     = ""
   description = "Webhook URL to send Notification about new Reports to (/apis/webhooks/...). Enables Discord Notification"
+}
+
+variable "cloudsploit_s3_bucket" {
+  type        = string
+  default     = ""
+  description = "S3 Bucket to upload CloudSploit Reports to"
 }
 
 variable "job_annotations" {

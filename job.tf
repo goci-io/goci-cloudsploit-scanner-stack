@@ -41,15 +41,6 @@ resource "kubernetes_cron_job" "cloudsploit_scanner" {
               }
             }
 
-            volume {
-              name = "private-key"
-
-              secret {
-                default_mode = "0400"
-                secret_name  = kubernetes_secret.signing_key.metadata.0.name
-              }
-            }
-
             container {
               name  = "renovate"
               image = "gocidocker/cloudsploit-scanner:${var.scanner_version}"
@@ -109,13 +100,6 @@ resource "kubernetes_cron_job" "cloudsploit_scanner" {
                 name       = "config"
                 sub_path   = "config.json"
                 mount_path = "/usr/app/config.json"
-              }
-
-              volume_mount {
-                read_only  = true
-                name       = "private-key"
-                sub_path   = "signing.key"
-                mount_path = "/usr/app/signing.key"
               }
             }
           }

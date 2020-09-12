@@ -1,27 +1,19 @@
 locals {
-  discord_notification_config = var.discord_webhook_url == "" ? {} : {
-    discord = {
-      type   = "discord"
-      name   = var.name
-      jobUrl = var.jobs_url
-      url    = var.discord_webhook_url
+  discord_notification_config = var.discord_webhook_url == "" ? tomap() : {
+    type = "discord"
+    url  = var.discord_webhook_url
+    scanDetails = {
+      host   = var.scan_details_host
+      prefix = var.scan_details_prefix
     }
   }
-}
 
-resource "tls_private_key" "signing" {
-  algorithm = "RSA"
-  rsa_bits  = 2048
-}
-
-resource "kubernetes_secret" "signing_key" {
-  metadata {
-    name      = format("%s-key", var.name)
-    namespace = var.k8s_namespace
-  }
-
-  data = {
-    "signing.key" = tls_private_key.signing.private_key_pem
+  s3_upload_config = var.cloudsploit_s3_bucket == "" ? tomap() : {
+    type   = "s3"
+    bucket = var.cloudsploit_s3_bucket
+    client = {
+      region = data.aws_region.current.name
+    }
   }
 }
 
@@ -33,18 +25,8 @@ resource "kubernetes_config_map" "scanner_config" {
 
   data = {
     "config.json" = jsonencode({
+      upload       = merge({}, local.s3_upload_config)
       notification = merge({}, local.discord_notification_config)
-      upload = {
-        type                 = "s3"
-        cloudfrontUrlSigning = true
-        cloudfrontHost       = module.cloudfront.cloudfront_host
-        cloudfrontKeypairId  = join("", module.cloudfront.cloudfront_keypair_ids)
-        bucket               = module.cloudfront.bucket_id
-        privateKeyPath       = "/usr/app/signing.key"
-        client = {
-          region = data.aws_region.current.name
-        }
-      }
     })
   }
 }
