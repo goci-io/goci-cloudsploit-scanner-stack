@@ -16,6 +16,11 @@ variable "scanner_version" {
   description = "Desired Scanner Docker Image Tag"
 }
 
+variable "scanner_config" {
+  type        = string
+  description = "Scanner Config in JSON Format. https://github.com/goci-io/cloudsploit-scanner/blob/master/config/example.json"
+}
+
 variable "k8s_namespace" {
   type        = string
   default     = "default"
@@ -32,30 +37,6 @@ variable "plugin_scan" {
   type        = string
   default     = ""
   description = "Plugin Scan to execute. See https://github.com/cloudsploit/scans/tree/master/plugins"
-}
-
-variable "scan_details_host" {
-  type        = string
-  default     = ""
-  description = "Host used to build Link to a Detail View of executed Scans. Used for Notifications"
-}
-
-variable "scan_details_prefix" {
-  type        = string
-  default     = ""
-  description = "URL Prefix used to build Link to a Detail View of executed Scans. Used for Notifications"
-}
-
-variable "discord_webhook_url" {
-  type        = string
-  default     = ""
-  description = "Webhook URL to send Notification about new Reports to (/apis/webhooks/...). Enables Discord Notification"
-}
-
-variable "cloudsploit_s3_bucket" {
-  type        = string
-  default     = ""
-  description = "S3 Bucket to upload CloudSploit Reports to"
 }
 
 variable "job_annotations" {

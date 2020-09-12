@@ -1,3 +1,14 @@
+resource "kubernetes_config_map" "scanner_config" {
+  metadata {
+    name      = var.name
+    namespace = var.k8s_namespace
+  }
+
+  data = {
+    "config.json" = var.scanner_config
+  }
+}
+
 resource "kubernetes_cron_job" "cloudsploit_scanner" {
   metadata {
     name      = var.name
