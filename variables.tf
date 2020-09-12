@@ -12,7 +12,7 @@ variable "schedule" {
 
 variable "scanner_version" {
   type        = string
-  default     = "0.3.0"
+  default     = "0.4.0"
   description = "Desired Scanner Docker Image Tag"
 }
 
