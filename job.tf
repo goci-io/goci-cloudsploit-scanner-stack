@@ -39,7 +39,13 @@ resource "kubernetes_cron_job" "cloudsploit_scanner" {
         backoff_limit              = 3
 
         template {
-          metadata {}
+          metadata {
+            annotations = var.job_annotations
+            labels = {
+              app     = "cloudsploit-scanner"
+              release = var.name
+            }
+          }
 
           spec {
             restart_policy = "OnFailure"
