@@ -75,10 +75,10 @@ variable "discord_webhook_url" {
   description = "Webhook URL to send Notification about new Reports to (/apis/webhooks/...). Enables Discord Notification"
 }
 
-variable "retention_in_days" {
-  type        = number
-  default     = 30
-  description = "Retention in Days for Reports to be available in S3"
+variable "cloudsploit_s3_bucket" {
+  type        = string
+  default     = ""
+  description = "S3 Bucket to upload CloudSploit Reports to"
 }
 
 variable "job_annotations" {
