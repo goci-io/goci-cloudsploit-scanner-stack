@@ -1,5 +1,5 @@
 locals {
-  discord_notification_config = var.discord_webhook_url == "" ? {} : {
+  discord_notification_config = var.discord_webhook_url == "" ? tomap() : {
     type = "discord"
     url  = var.discord_webhook_url
     scanDetails = {
@@ -8,7 +8,7 @@ locals {
     }
   }
 
-  s3_upload_config = var.cloudsploit_s3_bucket == "" ? {} : {
+  s3_upload_config = var.cloudsploit_s3_bucket == "" ? tomap() : {
     type   = "s3"
     bucket = var.cloudsploit_s3_bucket
     client = {
