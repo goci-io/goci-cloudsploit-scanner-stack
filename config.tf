@@ -1,7 +1,7 @@
 locals {
   discord_notification_config = var.discord_webhook_url == "" ? {} : {
-    type        = "discord"
-    url         = var.discord_webhook_url
+    type = "discord"
+    url  = var.discord_webhook_url
     scanDetails = {
       host   = var.scan_details_host
       prefix = var.scan_details_prefix
@@ -39,18 +39,18 @@ module "bucket_label" {
 }
 
 module "s3_reports" {
-  source         = "terraform-aws-modules/s3-bucket/aws"
-  bucket         = module.bucket_label.id
-  tags           = module.bucket_label.tags
-  acl            = "private"
-  force_destroy  = true
+  source        = "terraform-aws-modules/s3-bucket/aws"
+  bucket        = module.bucket_label.id
+  tags          = module.bucket_label.tags
+  acl           = "private"
+  force_destroy = true
   lifecycle_rule = [
     {
       expiration = {
         days = var.retention_in_days
       }
 
-      id   = "CloudSploitClean"
+      id = "CloudSploitClean"
       tags = merge(module.bucket_label.tags, {
         AutoClean = "true",
         Retention = format("%d Days", var.retention_in_days)
