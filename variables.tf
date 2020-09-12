@@ -40,16 +40,28 @@ variable "plugin_scan" {
   description = "Plugin Scan to execute. See https://github.com/cloudsploit/scans/tree/master/plugins"
 }
 
-variable "jobs_url" {
+variable "scan_details_host" {
   type        = string
   default     = ""
-  description = "URL used to link to a Detail View of executed Scans"
+  description = "Host used to build Link to a Detail View of executed Scans. Used for Notifications"
+}
+
+variable "scan_details_prefix" {
+  type        = string
+  default     = ""
+  description = "URL Prefix used to build Link to a Detail View of executed Scans. Used for Notifications"
 }
 
 variable "discord_webhook_url" {
   type        = string
   default     = ""
   description = "Webhook URL to send Notification about new Reports to (/apis/webhooks/...). Enables Discord Notification"
+}
+
+variable "retention_in_days" {
+  type        = number
+  default     = 30
+  description = "Retention in Days for Reports to be available in S3"
 }
 
 variable "job_annotations" {

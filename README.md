@@ -8,7 +8,8 @@
 
 ### Contains:
 - [Cloudsploit Scanner](https://github.com/goci-io/cloudsploit-scanner) as CronJob
-- Cloudfront and S3 Buckets for Reports and signed URLs
+- Support for Discord Notifications and S3 Upload
+- S3 Bucket for Reports
 
 
 **Note:** This Module is intended to be used as Root/Standalone Module.
