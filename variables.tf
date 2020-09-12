@@ -4,29 +4,6 @@ variable "name" {
   description = "Name of Cloudsploit Scanner Installation"
 }
 
-variable "namespace" {
-  type        = string
-  description = "Company or Organization Prefix"
-}
-
-variable "stage" {
-  type        = string
-  default     = null
-  description = "Stage, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release'"
-}
-
-variable "attributes" {
-  type        = list(string)
-  default     = []
-  description = "Additional attributes (e.g. `1`)"
-}
-
-variable "tags" {
-  type        = map(string)
-  default     = {}
-  description = "Additional tags (e.g. `map('BusinessUnit','XYZ')`"
-}
-
 variable "schedule" {
   type        = string
   default     = "0 3 * * 0"
